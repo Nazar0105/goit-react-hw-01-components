@@ -1,0 +1,38 @@
+/* Додайте стилі для таблиці */
+.transaction-history {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Додайте стилі для заголовку таблиці */
+.transaction-history th {
+    background-color: #f0f0f0;
+    text-align: left;
+    padding: 8px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+}
+
+/* Додайте стилі для рядків таблиці */
+.transaction-history tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.transaction-history td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Додайте стилі для різних типів транзакцій */
+.payment {
+    color: green;
+}
+
+.invoice {
+    color: blue;
+}
+
+.withdrawal {
+    color: red;
+}
