@@ -1,42 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Statistics.module.css'; 
+import styles from './Statistics.module.css';
 
-const Statistics = ({ title, stats }) => {
-  
-  const statsByExtension = {};
-
-  stats.forEach(({ id, label, percentage }) => {
-    
-    const extension = label.split('.').pop();
-
-    if (statsByExtension[extension]) {
-      
-      statsByExtension[extension].percentage += percentage;
-    } else {
-      
-      statsByExtension[extension] = {
-        id: extension,
-        label: `.${extension}`,
-        percentage,
-      };
-    }
-  });
-
-  return (
-    <section className="stats-container">
-      {title && <h2 className="stats-title">{title}</h2>}
-      <ul className="stats-list">
-        {Object.values(statsByExtension).map(({ id, label, percentage }) => (
-          <li key={id} className="stats-item">
-            <span className="stats-label">{label}</span>
-            <span className="stats-percentage">{percentage}%</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-};
+const Statistics = ({ title, stats }) => (
+  <section className={styles['stats-container']}>
+    {title && <h2 className={styles['stats-title']}>{title}</h2>}
+    <ul className={styles['stats-list']}>
+      {stats.map(stat => (
+        <li
+          className={styles['stats-item']}
+          key={stat.id}
+        >
+          <span className={styles['stats-label']}>{stat.label}</span>
+          <span className={styles['stats-percentage']}>{stat.percentage}%</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+);
 
 Statistics.propTypes = {
   title: PropTypes.string,

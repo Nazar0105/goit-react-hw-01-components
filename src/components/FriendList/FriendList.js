@@ -1,13 +1,15 @@
-// FriendList.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import FriendListItem from './FriendListItem';
-import './FriendList.module.css'; 
+import styles from './FriendList.module.css';
 
 const FriendList = ({ friends }) => (
-  <ul className="friend-list">
-    {friends.map(({ id, avatar, name, isOnline }) => (
-      <FriendListItem key={id} avatar={avatar} name={name} isOnline={isOnline} />
+  <ul className={styles['friend-list']}>
+    {friends.map(friend => (
+      <li className={styles['item']} key={friend.id}>
+        <span className={`${styles['status']} ${friend.isOnline ? styles['online'] : ''}`} />
+        <img className={styles['avatar']} src={friend.avatar} alt={friend.name} width="48" />
+        <p className={styles['name']}>{friend.name}</p>
+      </li>
     ))}
   </ul>
 );
@@ -16,9 +18,9 @@ FriendList.propTypes = {
   friends: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
+      isOnline: PropTypes.bool.isRequired,
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      isOnline: PropTypes.bool.isRequired,
     })
   ).isRequired,
 };

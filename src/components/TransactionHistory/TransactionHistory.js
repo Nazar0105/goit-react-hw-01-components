@@ -1,35 +1,33 @@
 import React from 'react';
-import './TransactionHistory.module.css';
 import PropTypes from 'prop-types';
+import styles from './TransactionHistory.module.css';
 
-function TransactionHistory({ items }) {
-  return (
-     <table className="transaction-history">
+const TransactionHistory = ({ items }) => (
+  <table className={styles['transaction-history']}>
     <thead>
       <tr>
-        <th>Type</th>
-        <th>Amount</th>
-        <th>Currency</th>
+        <th className={styles['header']}>Type</th>
+        <th className={styles['header']}>Amount</th>
+        <th className={styles['header']}>Currency</th>
       </tr>
     </thead>
     <tbody>
       {items.map(item => (
         <tr key={item.id}>
-          <td>{item.type}</td>
+          <td className={styles[item.type]}>{item.type}</td>
           <td>{item.amount}</td>
           <td>{item.currency}</td>
         </tr>
       ))}
     </tbody>
   </table>
-  );
-}
+);
 
 TransactionHistory.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
+      type: PropTypes.oneOf(['payment', 'invoice', 'withdrawal']).isRequired,
       amount: PropTypes.string.isRequired,
       currency: PropTypes.string.isRequired,
     })
